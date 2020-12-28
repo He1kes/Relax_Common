@@ -17,7 +17,7 @@ public class CancelPolicy implements Serializable {
     /**
      * 取消策略id
      */
-    private Long policyId;
+    private Integer policyId;
 
     /**
      * 取消策略名称
@@ -29,13 +29,14 @@ public class CancelPolicy implements Serializable {
      */
     private String policyContent;
 
-    public Long getPolicyId() {
+    public Integer getPolicyId() {
         return policyId;
     }
 
-    public void setPolicyId(Long policyId) {
+    public void setPolicyId(Integer policyId) {
         this.policyId = policyId;
     }
+
     public String getPolicyName() {
         return policyName;
     }

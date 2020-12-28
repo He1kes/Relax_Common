@@ -90,6 +90,11 @@ public class HouseInfo implements Serializable {
      */
     private Integer checkStatus;
 
+    /**
+     * 退订政策，默认为1（灵活的取消政策）
+     */
+    private Integer cancelPolicy;
+
     public Integer getId() {
         return id;
     }
@@ -197,6 +202,14 @@ public class HouseInfo implements Serializable {
         this.checkStatus = checkStatus;
     }
 
+    public Integer getCancelPolicy() {
+        return cancelPolicy;
+    }
+
+    public void setCancelPolicy(Integer cancelPolicy) {
+        this.cancelPolicy = cancelPolicy;
+    }
+
     @Override
     public String toString() {
         return "HouseInfo{" +
@@ -215,6 +228,7 @@ public class HouseInfo implements Serializable {
                 ", desc='" + desc + '\'' +
                 ", offStatus=" + offStatus +
                 ", checkStatus=" + checkStatus +
+                ", cancelPolicy=" + cancelPolicy +
                 '}';
     }
 }
