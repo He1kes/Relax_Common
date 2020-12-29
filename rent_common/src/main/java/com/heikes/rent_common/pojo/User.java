@@ -46,6 +46,8 @@ public class User implements Serializable {
      */
     private Integer userStatus;
 
+    private String userImage;
+
     public Long getId() {
         return id;
     }
@@ -96,16 +98,25 @@ public class User implements Serializable {
         this.userStatus = userStatus;
     }
 
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
-            ", userName=" + userName +
-            ", password=" + password +
-            ", userAccount=" + userAccount +
-            ", phone=" + phone +
-            ", idCard=" + idCard +
-            ", userStatus=" + userStatus +
-        "}";
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userAccount='" + userAccount + '\'' +
+                ", phone='" + phone + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", userStatus=" + userStatus +
+                ", userImage='" + userImage + '\'' +
+                '}';
     }
 }
