@@ -1,4 +1,4 @@
-package com.heikes.rent_common.vo;
+package com.heikes.rent_common.meiju;
 
 /**
  * 状态码实体类
