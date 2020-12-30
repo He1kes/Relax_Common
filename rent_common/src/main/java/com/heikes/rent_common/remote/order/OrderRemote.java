@@ -26,5 +26,5 @@ public interface OrderRemote {
 
     /*根据id查询订单*/
     @RequestMapping("/getOrderById")
-    public Bizdto<OrderInfo> getOrderById(Long id);
+    public Bizdto<OrderInfo> getOrderById(@RequestParam("id") Long id);
 }
