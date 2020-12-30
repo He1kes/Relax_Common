@@ -5,7 +5,7 @@ import java.io.Serializable;
 /*
 * 返回结果实体类
 * */
-public class Result<T> implements Serializable {
+public class ResultVo<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,15 +17,15 @@ public class Result<T> implements Serializable {
 
     private T data;//返回数据
 
-    public Result() {}
+    public ResultVo() {}
 
-    public Result(boolean flag, Integer code, String message) {
+    public ResultVo(boolean flag, Integer code, String message) {
         this.flag = flag;
         this.code = code;
         this.message = message;
     }
 
-    public Result(boolean flag, Integer code, String message, T data) {
+    public ResultVo(boolean flag, Integer code, String message, T data) {
         this.flag = flag;
         this.code = code;
         this.message = message;
@@ -66,7 +66,7 @@ public class Result<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" +
+        return "ResultVo{" +
                 "flag=" + flag +
                 ", code=" + code +
                 ", message='" + message + '\'' +
