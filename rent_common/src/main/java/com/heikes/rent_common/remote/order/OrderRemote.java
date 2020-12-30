@@ -13,7 +13,7 @@ public interface OrderRemote {
     /*根据用户id、订单状态（皆非必须），分页显示订单*/
     @RequestMapping("/getOrdersByUserIdOrderStatus")
     public Bizdto<PageInfo<OrderInfo>> getOrdersByUserIdOrderStatus(
-            @RequestParam("pageNo") String pageNo,@RequestParam("pageSize") String pageSize,
+            @RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,
             @RequestParam("userId") Long userId,@RequestParam("orderStatus") String orderStatus);
 
     /*生成订单*/
@@ -24,4 +24,7 @@ public interface OrderRemote {
     @RequestMapping("/updateOrderStatus")
     public Bizdto<Integer> updateOrderStatus(@RequestParam("orderId") Long orderId,@RequestParam("orderStatus") String OrderStatus);
 
+    /*根据id查询订单*/
+    @RequestMapping("/getOrderById")
+    public Bizdto<OrderInfo> getOrderById(Long id);
 }
