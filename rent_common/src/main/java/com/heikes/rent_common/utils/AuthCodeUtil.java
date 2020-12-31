@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class AuthCodeUtils {
+public class AuthCodeUtil {
 
 	public String drawRandomText(int width, int height, BufferedImage verifyImg) {
 
