@@ -33,19 +33,25 @@ public interface InfoRemote {
 
     //后台房源查询管理员
     @RequestMapping("/BackAdminall")
-    Bizdto<PageInfo<HouseInfo>> BackAdminall(@RequestParam("userName") String userName,
+    Bizdto<PageInfo<HouseInfo>> BackAdminall(@RequestParam("pageNum") Integer pageNum,
+                                  @RequestParam("pageSize") Integer pageSize,
+                                  @RequestParam("userName") String userName,
                                   @RequestParam("address") String address);
 
     //前台房源查询
     @RequestMapping("/Fontall")
-    Bizdto<PageInfo<HouseInfo>> Fontall(@RequestParam("houseType") Integer houseType,
+    Bizdto<PageInfo<HouseInfo>> Fontall(@RequestParam("pageNum") Integer pageNum,
+                                        @RequestParam("pageSize") Integer pageSize,
+                                        @RequestParam("houseType") Integer houseType,
                                         @RequestParam("area") Integer area,
                                         @RequestParam("rent") Integer rent,
                                         @RequestParam("address") String address);
 
     //后台查询房源商家
     @RequestMapping("/BackBussall")
-    Bizdto<PageInfo<HouseInfo>> BackBussall(@RequestParam("address") String address,
+    Bizdto<PageInfo<HouseInfo>> BackBussall(@RequestParam("pageNum") Integer pageNum,
+                                            @RequestParam("pageSize") Integer pageSize,
+                                            @RequestParam("address") String address,
                                             @RequestParam("checkStatus") Integer checkStatus);
 
     //通过活动请求
