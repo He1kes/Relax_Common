@@ -32,6 +32,16 @@ public class ActivitiesCheck implements Serializable {
      */
     private int offId;
 
+    private String offName;
+
+    public String getOffName() {
+        return offName;
+    }
+
+    public void setOffName(String offName) {
+        this.offName = offName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -69,6 +79,7 @@ public class ActivitiesCheck implements Serializable {
                 ", landlordId=" + landlordId +
                 ", houseId=" + houseId +
                 ", offId=" + offId +
+                ", offName='" + offName + '\'' +
                 '}';
     }
 }
