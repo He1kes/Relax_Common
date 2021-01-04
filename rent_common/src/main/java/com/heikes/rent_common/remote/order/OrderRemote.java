@@ -14,7 +14,7 @@ public interface OrderRemote {
     @RequestMapping("/getOrdersByUserIdOrderStatus")
     public Bizdto<PageInfo<OrderInfo>> getOrdersByUserIdOrderStatus(
             @RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,
-            @RequestParam("userId") Long userId,@RequestParam("orderStatus") String orderStatus);
+            @RequestParam(value = "userId",required = false) Long userId, @RequestParam(value = "orderStatus",required = false) String orderStatus);
 
     /*生成订单*/
     @RequestMapping("/generateOrder")
