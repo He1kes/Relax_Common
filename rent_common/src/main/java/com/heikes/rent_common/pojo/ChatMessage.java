@@ -1,5 +1,8 @@
 package com.heikes.rent_common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -45,6 +48,8 @@ public class ChatMessage implements Serializable {
     /**
      * 发送时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sendDate;
 
     /**
