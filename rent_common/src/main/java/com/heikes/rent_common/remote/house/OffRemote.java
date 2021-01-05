@@ -9,5 +9,5 @@ import java.util.List;
 public interface OffRemote {
     //查询全部活动政策
     @RequestMapping("/allOff")
-    List<Off> allOff();
+    Bizdto<List<Off>> allOff();
 }

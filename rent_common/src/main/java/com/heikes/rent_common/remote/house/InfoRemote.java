@@ -20,8 +20,7 @@ public interface InfoRemote {
 
     //修改修改房源
     @RequestMapping("/updateHouseInfo")
-    public Bizdto<Integer> updateHouseInfo(@RequestParam("id") Integer id,
-                                           @RequestBody HouseInfo houseInfo);
+    public Bizdto<Integer> updateHouseInfo(@RequestBody HouseInfo houseInfo);
 
     //审核
     @RequestMapping("HouseCheckPass")
@@ -37,6 +36,13 @@ public interface InfoRemote {
                                   @RequestParam("pageSize") Integer pageSize,
                                   @RequestParam("userName") String userName,
                                   @RequestParam("address") String address);
+
+    //后台房源查询管理员
+    @RequestMapping("/BackAdminCheck")
+    Bizdto<PageInfo<HouseInfo>> BackAdminCheck(@RequestParam("pageNum") Integer pageNum,
+                                             @RequestParam("pageSize") Integer pageSize,
+                                             @RequestParam("userName") String userName,
+                                             @RequestParam("address") String address);
 
     //前台房源查询
     @RequestMapping("/Fontall")
