@@ -84,6 +84,10 @@ public class OrderInfo implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date stopDate;
 
+    //冗余字段
+    //查询到的数据总条数
+    private Integer counts;
+
     public Long getId() {
         return id;
     }
@@ -176,6 +180,14 @@ public class OrderInfo implements Serializable {
 
     public void setStopDate(Date stopDate) {
         this.stopDate = stopDate;
+    }
+
+    public Integer getCounts() {
+        return counts;
+    }
+
+    public void setCounts(Integer counts) {
+        this.counts = counts;
     }
 
     @Override
