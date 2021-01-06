@@ -3,6 +3,7 @@ package com.heikes.rent_common.remote.house;
 
 import com.github.pagehelper.PageInfo;
 import com.heikes.rent_common.dto.Bizdto;
+import com.heikes.rent_common.pojo.CancelPolicy;
 import com.heikes.rent_common.pojo.HouseInfo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,4 +64,8 @@ public interface InfoRemote {
     //通过活动请求
     @RequestMapping("/info/activePass")
     Bizdto<Integer> activePass(@RequestParam("id") Integer id);
+
+    //根据id查询具体取消政策
+    @RequestMapping("/info/cancel")
+    Bizdto<CancelPolicy> cancel(@RequestParam("id") Integer id);
 }
