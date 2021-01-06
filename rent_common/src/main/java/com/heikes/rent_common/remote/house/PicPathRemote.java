@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface PicPathRemote {
     //新增图片路径
-    @RequestMapping("/addPicPath")
+    @RequestMapping("/pic/addPicPath")
     Bizdto<Integer> insert(PicPath picPath);
 
     //根据房源id查询全部图片路径
-    @RequestMapping("/allPathById")
+    @RequestMapping("/pic/allPathById")
     Bizdto<List<PicPath>> allPath(@RequestParam("houseId") Integer houseId);
 }

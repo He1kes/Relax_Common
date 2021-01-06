@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface CollectRemote {
 
     //添加心愿单
-    @RequestMapping("/addCollect")
+    @RequestMapping("/collect/addCollect")
     Bizdto<Integer> insert(@RequestBody HouseCollect houseCollect);
 }

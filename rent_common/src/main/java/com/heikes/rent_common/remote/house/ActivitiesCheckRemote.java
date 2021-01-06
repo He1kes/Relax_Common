@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ActivitiesCheckRemote {
 
     //发出促销请求
-    @RequestMapping("/addActivitiesCheck")
+    @RequestMapping("/activities/addActivitiesCheck")
     Bizdto<Integer> insert(@RequestBody ActivitiesCheck activitiesCheck);
 
     //查询全部商户促销
-    @RequestMapping("/allActivitiesCheck")
+    @RequestMapping("/activities/allActivitiesCheck")
     Bizdto<PageInfo<ActivitiesCheck>> allActivitiesCheck(@RequestParam("offDetails") String offDetails);
 }

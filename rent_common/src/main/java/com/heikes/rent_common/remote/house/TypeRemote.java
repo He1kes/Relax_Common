@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TypeRemote {
     //全部房屋类型
-    @RequestMapping("/allHouseType")
+    @RequestMapping("/type/allHouseType")
     Bizdto<List<HouseType>> getAllHouseType();
 }
