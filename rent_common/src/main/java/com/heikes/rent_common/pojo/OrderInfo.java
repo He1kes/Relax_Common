@@ -72,6 +72,18 @@ public class OrderInfo implements Serializable {
      */
     private String widrqoutRequestNo;
 
+    /**
+     * 入住时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+
+    /**
+     * 离开时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date stopDate;
+
     public Long getId() {
         return id;
     }
@@ -150,6 +162,22 @@ public class OrderInfo implements Serializable {
         this.widrqoutRequestNo = widrqoutRequestNo;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getStopDate() {
+        return stopDate;
+    }
+
+    public void setStopDate(Date stopDate) {
+        this.stopDate = stopDate;
+    }
+
     @Override
     public String toString() {
         return "OrderInfo{" +
@@ -164,6 +192,8 @@ public class OrderInfo implements Serializable {
             ", houseId=" + houseId +
             ", tradeNo=" + tradeNo +
             ", widrqoutRequestNo=" + widrqoutRequestNo +
+            ", startDate=" + startDate +
+            ", stopDate=" + stopDate +
         "}";
     }
 }
