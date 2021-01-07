@@ -17,6 +17,18 @@ public interface ChatRemote {
             @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,
             @RequestParam("selfId") Long selfId);
 
+    /*未读消息条数*/
+    @RequestMapping("/noViewCounts")
+    public Bizdto<Integer> noViewCounts(@RequestParam("otherId") Long otherId,@RequestParam("selfId") Long selfId);
+
+    /*未读消息id数组*/
+    @RequestMapping("/noViewIds")
+    public Bizdto<List<Long>> noViewIds(@RequestParam("otherId") Long otherId,@RequestParam("selfId") Long selfId);
+
+    /*将未读消息置为已读*/
+    @RequestMapping("/setViewed")
+    public Bizdto<Integer> setViewed(@RequestParam("chatId") Long chatId);
+
     /*根据对方id、自己id获取聊天详细信息*/
     @RequestMapping("/getChatDetail")
     public Bizdto<List<ChatMessage>> getChatDetail(
