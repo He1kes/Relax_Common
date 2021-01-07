@@ -1,5 +1,8 @@
 package com.heikes.rent_common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -35,7 +38,32 @@ public class Comment implements Serializable {
     /**
      * 评论日期	
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date date;
+
+    private String userName;
+
+    private String houseName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public void setHouseName(String houseName) {
+        this.houseName = houseName;
+    }
 
     public Long getId() {
         return id;
@@ -76,11 +104,13 @@ public class Comment implements Serializable {
     @Override
     public String toString() {
         return "Comment{" +
-            "id=" + id +
-            ", availabilityId=" + availabilityId +
-            ", content=" + content +
-            ", userId=" + userId +
-            ", date=" + date +
-        "}";
+                "id=" + id +
+                ", availabilityId=" + availabilityId +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", date=" + date +
+                ", userName='" + userName + '\'' +
+                ", houseName='" + houseName + '\'' +
+                '}';
     }
 }

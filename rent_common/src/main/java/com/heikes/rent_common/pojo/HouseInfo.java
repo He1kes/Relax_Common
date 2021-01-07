@@ -95,6 +95,20 @@ public class HouseInfo implements Serializable {
      */
     private Integer cancelPolicy;
 
+    /**
+     *
+     * 房东名字
+     */
+    private String landlordName;
+
+    public String getLandlordName() {
+        return landlordName;
+    }
+
+    public void setLandlordName(String landlordName) {
+        this.landlordName = landlordName;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -229,6 +243,7 @@ public class HouseInfo implements Serializable {
                 ", offStatus=" + offStatus +
                 ", checkStatus=" + checkStatus +
                 ", cancelPolicy=" + cancelPolicy +
+                ", landlordName='" + landlordName + '\'' +
                 '}';
     }
 }

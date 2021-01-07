@@ -1,5 +1,8 @@
 package com.heikes.rent_common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -45,6 +48,8 @@ public class OrderInfo implements Serializable {
     /**
      * 订单创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date orderTime;
 
     /**
@@ -66,6 +71,18 @@ public class OrderInfo implements Serializable {
      * 退款请求号
      */
     private String widrqoutRequestNo;
+
+    /**
+     * 入住时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date startDate;
+
+    /**
+     * 离开时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date stopDate;
 
     public Long getId() {
         return id;
@@ -145,6 +162,22 @@ public class OrderInfo implements Serializable {
         this.widrqoutRequestNo = widrqoutRequestNo;
     }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getStopDate() {
+        return stopDate;
+    }
+
+    public void setStopDate(Date stopDate) {
+        this.stopDate = stopDate;
+    }
+
     @Override
     public String toString() {
         return "OrderInfo{" +
@@ -159,6 +192,8 @@ public class OrderInfo implements Serializable {
             ", houseId=" + houseId +
             ", tradeNo=" + tradeNo +
             ", widrqoutRequestNo=" + widrqoutRequestNo +
+            ", startDate=" + startDate +
+            ", stopDate=" + stopDate +
         "}";
     }
 }

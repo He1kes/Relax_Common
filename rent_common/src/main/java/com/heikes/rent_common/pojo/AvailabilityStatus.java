@@ -1,5 +1,8 @@
 package com.heikes.rent_common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -20,11 +23,21 @@ public class AvailabilityStatus implements Serializable {
     /**
      * 开始日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date startDate;
 
     /**
      * 结束日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Date stopDate;
 
     /**
