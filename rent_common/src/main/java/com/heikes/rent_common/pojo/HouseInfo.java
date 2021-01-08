@@ -63,7 +63,7 @@ public class HouseInfo implements Serializable {
     /**
      * 关联房东表
      */
-    private Integer landlordId;
+    private Long landlordId;
 
     /**
      * 纬度
@@ -172,11 +172,11 @@ public class HouseInfo implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-    public Integer getLandlordId() {
+    public Long getLandlordId() {
         return landlordId;
     }
 
-    public void setLandlordId(Integer landlordId) {
+    public void setLandlordId(Long landlordId) {
         this.landlordId = landlordId;
     }
     public BigDecimal getLat() {
