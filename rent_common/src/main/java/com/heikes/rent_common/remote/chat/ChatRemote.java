@@ -13,7 +13,7 @@ public interface ChatRemote {
 
     /*根据自己的id，获取与自己有聊天记录的所有用户的id*/
     @RequestMapping("/getOthersList")
-    public Bizdto<PageInfo<Long>> getOthersList(
+    public Bizdto<PageInfo<String>> getOthersList(
             @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,
             @RequestParam("selfId") Long selfId);
 
