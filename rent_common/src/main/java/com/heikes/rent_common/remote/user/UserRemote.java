@@ -19,7 +19,7 @@ import java.util.Map;
 public interface UserRemote {
 
     @PostMapping(value = "addNormalUser")
-    Bizdto<Boolean> addNormalUser(@RequestBody User user);
+    Bizdto<Boolean> addNormalUser(@RequestBody User user, @RequestParam(value = "roleId") Long roleId);
 
     @GetMapping(value = "selectUserImg")
     Bizdto<User> selectUserImg(@RequestParam(value = "userAccount") String userAccount);
@@ -30,4 +30,7 @@ public interface UserRemote {
 
     @PostMapping(value = "selectUserByColumn")
     Bizdto<User> selectUserByColumn(@RequestBody Map<String, Object> columns);
+
+    @PostMapping(value = "updateColumnById")
+    Bizdto<Boolean> updateColumnById(@RequestBody Map<String, Object> map);
 }
