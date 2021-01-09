@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@RequestMapping("/type/font/public")
 public interface TypeRemote {
     //全部房屋类型
-    @RequestMapping("/type/allHouseType")
+    @RequestMapping("/allHouseType")
     Bizdto<List<HouseType>> getAllHouseType();
 }

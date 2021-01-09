@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heikes.house_provider.mapper.OffMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.Off">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="off_details" jdbcType="VARCHAR" property="offDetails" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, off_details
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from off
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="offAll" resultMap="BaseResultMap">
+    select * from off
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from off
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.Off">
+    insert into off (id, off_details)
+    values (#{id,jdbcType=INTEGER}, #{offDetails,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heikes.rent_common.pojo.Off">
+    insert into off
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="offDetails != null">
+        off_details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="offDetails != null">
+        #{offDetails,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heikes.rent_common.pojo.Off">
+    update off
+    <set>
+      <if test="offDetails != null">
+        off_details = #{offDetails,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.Off">
+    update off
+    set off_details = #{offDetails,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

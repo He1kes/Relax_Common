@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: comment-consumer
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        namespace: 90f73828-ca6f-43a0-9422-f746ff7df8dc
+        group: rent_dev
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 90f73828-ca6f-43a0-9422-f746ff7df8dc
+        group: relax_dev
+server:
+  port: 6606
