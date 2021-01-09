@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-consumer
+          uri: lb://user-consumer
+          predicates:
+            - Path=/user/**
+        - id: order-route-proxy
+          uri: lb://order-consumer
+          predicates:
+            - Path=/order/**
+        - id: chat-route-proxy
+          uri: lb://chat-consumer
+          predicates:
+            - Path=/chat/**
+  redis:
+    database: 0
+    host: 192.168.0.15
+    port: 6379
+

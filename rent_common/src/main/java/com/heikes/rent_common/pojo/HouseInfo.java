@@ -1,7 +1,5 @@
 package com.heikes.rent_common.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.math.BigDecimal;
 import java.io.Serializable;
 
@@ -13,7 +11,6 @@ import java.io.Serializable;
  * @author yanxin
  * @since 2020-12-24
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class HouseInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -175,7 +172,6 @@ public class HouseInfo implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
     public Long getLandlordId() {
         return landlordId;
     }
@@ -183,7 +179,6 @@ public class HouseInfo implements Serializable {
     public void setLandlordId(Long landlordId) {
         this.landlordId = landlordId;
     }
-
     public BigDecimal getLat() {
         return lat;
     }
@@ -229,6 +224,26 @@ public class HouseInfo implements Serializable {
         this.cancelPolicy = cancelPolicy;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "HouseInfo{" +
+                "id=" + id +
+                ", estateName='" + estateName + '\'' +
+                ", houseType=" + houseType +
+                ", area=" + area +
+                ", rent=" + rent +
+                ", lot='" + lot + '\'' +
+                ", address='" + address + '\'' +
+                ", label='" + label + '\'' +
+                ", status=" + status +
+                ", landlordId=" + landlordId +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                ", desc='" + desc + '\'' +
+                ", offStatus=" + offStatus +
+                ", checkStatus=" + checkStatus +
+                ", cancelPolicy=" + cancelPolicy +
+                ", landlordName='" + landlordName + '\'' +
+                '}';
+    }
 }

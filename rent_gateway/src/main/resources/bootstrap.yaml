@@ -1,0 +1,26 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: rent-getaway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.80:8848 #nacos注册中心地址
+        namespace: 092cdba7-f25a-4e6b-a180-f1436359652f
+        group: rent_dev
+#      config:
+#        server-addr: 192.168.0.15:8848 #nacos的ip地址和端口号
+#        file-extension: yaml  #nacos里配置文件格式，也是后缀名
+#        #名命空间 代表配置文件存放的地方（用于区分不同的项目）
+#        namespace: 6900eb83-7773-4234-afb0-275bb91557c8
+#        #设置文件不同的组（开发组，测试组等）
+#        group: rent-dev
+#    gateway:
+#      routes:
+#        - id: user-consumer
+#          uri: lb://user-consumer
+#          predicates:
+#            - Path=/user/**
