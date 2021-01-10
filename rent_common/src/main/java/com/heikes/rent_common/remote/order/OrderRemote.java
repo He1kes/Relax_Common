@@ -27,4 +27,15 @@ public interface OrderRemote {
     /*根据id查询订单*/
     @RequestMapping("/getOrderById")
     public Bizdto<OrderInfo> getOrderById(@RequestParam("id") Long id);
+
+    /*后台查询（带取消订单原因）*/
+    @RequestMapping("/getOrdersBack")
+    public Bizdto<PageInfo<OrderInfo>> getOrdersBack(
+            @RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize,
+            @RequestParam(value = "landId",required = false) Long landId, @RequestParam(value = "orderStatus",required = false) String orderStatus);
+
+    /*存储取消订单原因*/
+    @RequestMapping("/setOrderRemark")
+    public Bizdto<Integer> setOrderRemark(@RequestParam("orderId") Long orderId, @RequestParam("cancel") String cancel);
+
 }

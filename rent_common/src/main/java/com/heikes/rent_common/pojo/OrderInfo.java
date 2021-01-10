@@ -85,8 +85,8 @@ public class OrderInfo implements Serializable {
     private Date stopDate;
 
     //冗余字段
-    //查询到的数据总条数
-    private Integer counts;
+    //订单取消原因
+    private String cancel;
 
     public Long getId() {
         return id;
@@ -182,12 +182,12 @@ public class OrderInfo implements Serializable {
         this.stopDate = stopDate;
     }
 
-    public Integer getCounts() {
-        return counts;
+    public String getCancel() {
+        return cancel;
     }
 
-    public void setCounts(Integer counts) {
-        this.counts = counts;
+    public void setCancel(String cancel) {
+        this.cancel = cancel;
     }
 
     @Override
