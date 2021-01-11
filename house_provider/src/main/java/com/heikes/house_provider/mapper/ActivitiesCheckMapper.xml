@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heikes.house_provider.mapper.ActivitiesCheckMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.ActivitiesCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="landlord_id" jdbcType="INTEGER" property="landlordId" />
+    <result column="house_id" jdbcType="INTEGER" property="houseId" />
+    <result column="off_id" jdbcType="INTEGER" property="offId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, landlord_id, house_id, off_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from activities_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="allActivities" resultType="com.heikes.rent_common.pojo.ActivitiesCheck">
+    select a.*,o.off_details as offName from activities_check a
+      inner join off o
+        on a.off_id = o.id
+        <where>
+          <if test="off_details != null and off_details != ''">
+            and o.off_details like concat('%',#{offDetails},'%')
+          </if>
+        </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activities_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.ActivitiesCheck">
+    insert into activities_check (landlord_id, house_id,
+      off_id)
+    values (#{landlordId,jdbcType=INTEGER}, #{houseId,jdbcType=INTEGER},
+      #{offId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heikes.rent_common.pojo.ActivitiesCheck">
+    insert into activities_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="landlordId != null">
+        landlord_id,
+      </if>
+      <if test="houseId != null">
+        house_id,
+      </if>
+      <if test="offId != null">
+        off_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="landlordId != null">
+        #{landlordId,jdbcType=INTEGER},
+      </if>
+      <if test="houseId != null">
+        #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="offId != null">
+        #{offId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heikes.rent_common.pojo.ActivitiesCheck">
+    update activities_check
+    <set>
+      <if test="landlordId != null">
+        landlord_id = #{landlordId,jdbcType=INTEGER},
+      </if>
+      <if test="houseId != null">
+        house_id = #{houseId,jdbcType=INTEGER},
+      </if>
+      <if test="offId != null">
+        off_id = #{offId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.ActivitiesCheck">
+    update activities_check
+    set landlord_id = #{landlordId,jdbcType=INTEGER},
+      house_id = #{houseId,jdbcType=INTEGER},
+      off_id = #{offId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

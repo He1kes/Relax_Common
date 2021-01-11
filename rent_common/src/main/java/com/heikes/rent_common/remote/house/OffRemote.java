@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@RequestMapping("/off/back")
 public interface OffRemote {
     //查询全部活动政策
-    @RequestMapping("/off/allOff")
+    @RequestMapping("/allOff")
     Bizdto<List<Off>> allOff();
 }

@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@RequestMapping("/pic")
 public interface PicPathRemote {
     //新增图片路径
-    @RequestMapping("/pic/addPicPath")
-    Bizdto<Integer> insert(PicPath picPath);
+    @RequestMapping("/back/pic/addPicPath")
+    Bizdto<Integer> insert(@RequestParam("path") String path,
+                           @RequestParam("houseId") Integer houseId);
 
     //根据房源id查询全部图片路径
-    @RequestMapping("/pic/allPathById")
+    @RequestMapping("/font/public/pic/allPathById")
     Bizdto<List<PicPath>> allPath(@RequestParam("houseId") Integer houseId);
 }

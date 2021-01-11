@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heikes.house_provider.mapper.HouseTypeMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.HouseType">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="house_type_name" jdbcType="VARCHAR" property="houseTypeName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, house_type_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from house_type
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="allType" resultMap="BaseResultMap">
+      select * from house_type
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from house_type
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.HouseType">
+    insert into house_type (id, house_type_name)
+    values (#{id,jdbcType=BIGINT}, #{houseTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heikes.rent_common.pojo.HouseType">
+    insert into house_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="houseTypeName != null">
+        house_type_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="houseTypeName != null">
+        #{houseTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heikes.rent_common.pojo.HouseType">
+    update house_type
+    <set>
+      <if test="houseTypeName != null">
+        house_type_name = #{houseTypeName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.HouseType">
+    update house_type
+    set house_type_name = #{houseTypeName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

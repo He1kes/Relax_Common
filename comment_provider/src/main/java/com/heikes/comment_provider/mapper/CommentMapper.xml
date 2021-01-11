@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heikes.comment_provider.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="availability_id" jdbcType="INTEGER" property="availabilityId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, availability_id, content, user_id, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="allComment" resultMap="BaseResultMap">
+      select h.estate_name as houseName,u.user_name as userName,c.* from comment c
+        inner join `user` u
+            on c.user_id = u.id
+                inner join house_info h
+                    on c.availability_id = h.id
+                    <where>
+                      <if test="houseName != null and houseName !=''">
+                        and h.estate_name like CONCAT('%',#{houseName},'%')
+                      </if>
+                      <if test="userName != null and userName !=''">
+                        and u.user_name like CONCAT('%',#{userName},'%')
+                      </if>
+                    </where>
+    </select>
+  <select id="allUserComment" resultMap="BaseResultMap">
+    select h.estate_name as houseName,u.user_name as userName,c.* from comment c
+      inner join `user` u
+        on c.user_id = u.id
+          inner join house_info h
+            on c.availability_id = h.id
+                where u.id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertSelective" parameterType="com.heikes.rent_common.pojo.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="availabilityId != null">
+        availability_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="availabilityId != null">
+        #{availabilityId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.Comment">
+    insert into comment(availability_id,content,user_id,`date`) values(#{availabilityId},#{content},#{userId},#{date})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heikes.rent_common.pojo.Comment">
+    update comment
+    <set>
+      <if test="availabilityId != null">
+        availability_id = #{availabilityId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.Comment">
+    update comment
+    set availability_id = #{availabilityId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
