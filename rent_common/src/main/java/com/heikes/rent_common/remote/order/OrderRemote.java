@@ -2,10 +2,13 @@ package com.heikes.rent_common.remote.order;
 
 import com.github.pagehelper.PageInfo;
 import com.heikes.rent_common.dto.Bizdto;
+import com.heikes.rent_common.kuo.OrderMoney;
 import com.heikes.rent_common.pojo.OrderInfo;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 public interface OrderRemote {
@@ -38,4 +41,30 @@ public interface OrderRemote {
     @RequestMapping("/setOrderRemark")
     public Bizdto<Integer> setOrderRemark(@RequestParam("orderId") Long orderId, @RequestParam("cancel") String cancel);
 
+    /*统计订单金额*/
+    @RequestMapping("/getOrderMoney")
+    public Bizdto<Double> getOrderMoney(
+            @RequestParam(value = "year",required = false) Integer year,
+            @RequestParam(value = "month",required = false) Integer month,
+            @RequestParam(value = "day",required = false) Integer day,
+            @RequestParam(value = "landId",required = false) Long landId,
+            @RequestParam(value = "orderStatus",required = false) String orderStatus);
+
+    /*统计订单总单数*/
+    @RequestMapping("/getOrderCounts")
+    public Bizdto<Integer> getOrderCounts(
+            @RequestParam(value = "landId",required = false) Long landId,
+            @RequestParam(value = "orderStatus",required = false) String orderStatus);
+
+    /*统计订单金额（每天）*/
+    @RequestMapping("/getOrderMoneyDay")
+    public Bizdto<List<OrderMoney>> getOrderMoneyDay(
+            @RequestParam("year") Integer year,@RequestParam("month") Integer month,@RequestParam("day") Integer day,
+            @RequestParam(value = "landId",required = false) Long landId);
+
+    /*统计订单金额（每月）*/
+    @RequestMapping("/getOrderMoneyMonth")
+    public Bizdto<List<OrderMoney>> getOrderMoneyMonth(
+            @RequestParam("year") Integer year,@RequestParam("month") Integer month,
+            @RequestParam(value = "landId",required = false) Long landId);
 }
