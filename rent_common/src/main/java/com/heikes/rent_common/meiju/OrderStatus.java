@@ -5,7 +5,8 @@ public enum OrderStatus {
     //枚举常量列表
     WAIT_PAY("待支付"),CANCEL_ONE("已取消（未付款）"),WAIT_CHECK("待房东确认"),
     CANCEL_TWO("已取消（房东拒绝）"), WAIT_STAY("待入住"),WAIT_REFUND("退款中"),
-    REFUND_FAIL("退款失败"),CANCEL_THREE("已取消（已退款）"),HAS_SUCCESS("已消费");
+    REFUND_FAIL("退款失败"),CANCEL_THREE("已取消（已退款）"),HAS_SUCCESS("已消费"),
+    HAS_CANCEL("已取消");
 
     //其他成员、方法
     private String orderStautsName;
