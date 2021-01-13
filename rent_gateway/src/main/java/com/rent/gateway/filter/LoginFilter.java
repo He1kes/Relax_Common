@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Create By Intellij IDEA
  *
@@ -41,18 +43,19 @@ public class LoginFilter implements GlobalFilter, Ordered {
                 ServerHttpResponse response = exchange.getResponse();
                 response.getHeaders().add("Content-Type", "application/json; charset=utf-8");
                 //HTTP 401 没有访问权限
-                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                response.setStatusCode(HttpStatus.CREATED);
                 //响应内容
                 String message = "{\"flag\":\"false\", \"code\":\"20002\", \"message\":\"未登录\", \"data\":null}";
                 DataBuffer buffer = response.bufferFactory().wrap(message.getBytes());
                 //请求结束，不再继续向下请求
                 return response.writeWith(Mono.just(buffer));
             } else {
-
+                //延长token时间
+                stringRedisTemplate.expire(token, 30L, TimeUnit.MINUTES);
                 if (request.getURI().toString().contains("/front/private/")) {
                     return chain.filter(exchange);
                 } else { //request.getURI().toString().contains("/back/")
-                    int roleId = (int) stringRedisTemplate.opsForHash().get(token, "roleId");
+                    int roleId =  Integer.parseInt(stringRedisTemplate.opsForHash().get(token, "roleId").toString());
                     //如果不为普通用户，则放行
                     if (roleId != 4) {
                         return chain.filter(exchange);
@@ -60,7 +63,7 @@ public class LoginFilter implements GlobalFilter, Ordered {
                         ServerHttpResponse response = exchange.getResponse();
                         response.getHeaders().add("Content-Type", "application/json; charset=utf-8");
                         //HTTP 401 没有访问权限
-                        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                        response.setStatusCode(HttpStatus.CREATED);
                         //响应内容
                         String message = "{\"flag\":\"false\", \"code\":\"20003\", \"message\":\"权限不足\", \"data\":null}";
                         DataBuffer buffer = response.bufferFactory().wrap(message.getBytes());

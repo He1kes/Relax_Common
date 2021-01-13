@@ -46,7 +46,15 @@ public class User implements Serializable {
      */
     private Integer userStatus;
 
+    /**
+     * 用户头像地址
+     */
     private String userImage;
+
+    /**
+    * 评论权限，0代表正常，1代表被封禁
+    **/
+    private Integer commentStatus;
 
     public Long getId() {
         return id;
@@ -106,6 +114,14 @@ public class User implements Serializable {
         this.userImage = userImage;
     }
 
+    public Integer getCommentStatus() {
+        return commentStatus;
+    }
+
+    public void setCommentStatus(Integer commentStatus) {
+        this.commentStatus = commentStatus;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -117,6 +133,7 @@ public class User implements Serializable {
                 ", idCard='" + idCard + '\'' +
                 ", userStatus=" + userStatus +
                 ", userImage='" + userImage + '\'' +
+                ", commentStatus=" + commentStatus +
                 '}';
     }
 }
