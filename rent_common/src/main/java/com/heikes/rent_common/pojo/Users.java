@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author yanxin
  * @since 2020-12-24
  */
-public class User implements Serializable {
+public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,14 +47,16 @@ public class User implements Serializable {
     private Integer userStatus;
 
     /**
-     * 用户头像地址
+     *用户头像
      */
     private String userImage;
 
     /**
-    * 评论权限，0代表正常，1代表被封禁
-    **/
+     * 评论权限，0代表正常，1代表被封禁
+     **/
     private Integer commentStatus;
+
+    private Role role;
 
     public Long getId() {
         return id;
@@ -114,6 +116,14 @@ public class User implements Serializable {
         this.userImage = userImage;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public Integer getCommentStatus() {
         return commentStatus;
     }
@@ -124,7 +134,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Users{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
@@ -134,6 +144,7 @@ public class User implements Serializable {
                 ", userStatus=" + userStatus +
                 ", userImage='" + userImage + '\'' +
                 ", commentStatus=" + commentStatus +
+                ", role=" + role +
                 '}';
     }
 }

@@ -2,11 +2,14 @@ package com.heikes.rent_common.remote.user;
 
 import com.heikes.rent_common.dto.Bizdto;
 import com.heikes.rent_common.pojo.User;
+import com.heikes.rent_common.pojo.Users;
+import com.heikes.rent_common.vo.PageResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,4 +36,7 @@ public interface UserRemote {
 
     @PostMapping(value = "updateColumnById")
     Bizdto<Boolean> updateColumnById(@RequestBody Map<String, Object> map);
+
+    @PostMapping(value = "selectUserListByColumn")
+    Bizdto<PageResult<Users>> selectUserListByColumn(@RequestBody Map<String, Object> map);
 }
