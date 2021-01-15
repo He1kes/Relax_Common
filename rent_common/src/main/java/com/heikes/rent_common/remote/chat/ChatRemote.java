@@ -38,4 +38,10 @@ public interface ChatRemote {
     @RequestMapping("/storeChat")
     public Bizdto<Integer> storeChat(@RequestBody ChatMessage chatMessage);
 
+    /*后台，根据自己的id，获取与自己有聊天记录的所有用户的id*/
+    @RequestMapping("/getOthersListBack")
+    public Bizdto<PageInfo<String>> getOthersListBack(
+            @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize,
+            @RequestParam("selfId") Long selfId);
+
 }
