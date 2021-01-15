@@ -49,7 +49,6 @@ public class InfoController {
         Bizdto<Integer> bizdto = infoService.insert(houseInfo);
         boolean flag = false;
         if (bizdto.getData() != null){
-            flag = true;
             for (MultipartFile file : files) {
                 try {
                     InputStream inputStream = file.getInputStream();
@@ -60,6 +59,7 @@ public class InfoController {
                     e.printStackTrace();
                 }
             }
+            flag = true;
             return new ResultVo<>(flag, StatusCode.OK,bizdto.getMessage(), bizdto.getData());
         }
         return new ResultVo<>(flag, bizdto.getCode(),bizdto.getMessage(), bizdto.getData());
@@ -116,12 +116,12 @@ public class InfoController {
         return new ResultVo<>(flag, bizdto.getCode(),bizdto.getMessage(), bizdto.getData());
     }
 
-    //后台房源查询管理员
+    //后台未审核房源查询管理员
     @RequestMapping("/back/BackAdminCheck")
     ResultVo<PageInfo<HouseInfo>> BackAdminCheck(@RequestParam("pageNum") Integer pageNum,
                                                @RequestParam("pageSize") Integer pageSize,
-                                               @RequestParam("userName") String userName,
-                                               @RequestParam("address") String address){
+                                               @RequestParam(value = "userName",required = false) String userName,
+                                               @RequestParam(value = "address",required = false) String address){
         Bizdto<PageInfo<HouseInfo>> bizdto = infoService.BackAdminallCheck(pageNum, pageSize, userName, address);
         boolean flag = false;
         if (bizdto.getData() != null){
@@ -152,9 +152,10 @@ public class InfoController {
     @RequestMapping("/back/BackBussAll")
     ResultVo<PageInfo<HouseInfo>> BackBussall(@RequestParam("pageNum") Integer pageNum,
                                             @RequestParam("pageSize") Integer pageSize,
-                                            @RequestParam("address") String address,
-                                            @RequestParam("checkStatus") Integer checkStatus){
-        Bizdto<PageInfo<HouseInfo>> bizdto = infoService.BackBussall(pageNum, pageSize, address, checkStatus);
+                                            @RequestParam(value = "address",required = false) String address,
+                                            @RequestParam(value = "checkStatus",required = false) Integer checkStatus,
+                                            @RequestParam("id") Long id){
+        Bizdto<PageInfo<HouseInfo>> bizdto = infoService.BackBussall(pageNum, pageSize, address, checkStatus,id);
         boolean flag = false;
         if (bizdto.getData() != null){
             flag = true;

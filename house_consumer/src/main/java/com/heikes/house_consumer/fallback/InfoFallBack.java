@@ -82,7 +82,7 @@ public class InfoFallBack implements FallbackFactory<InfoClient> {
             }
 
             @Override
-            public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus) {
+            public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus,Long id) {
                 Bizdto<PageInfo<HouseInfo>> bizdto = new Bizdto<>();
                 bizdto.setCode(StatusCode.REMOTEERROR);
                 bizdto.setMessage(throwable.getMessage());

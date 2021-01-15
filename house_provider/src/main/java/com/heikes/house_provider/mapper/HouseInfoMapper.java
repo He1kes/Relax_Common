@@ -32,7 +32,7 @@ public interface HouseInfoMapper {
     //前台房源查询
     List<HouseInfo> Fontall(Integer house_type,Integer area,Integer rent,String address);
     //后台查询房源商家
-    List<HouseInfo> BackBussall(String address, Integer checkStatus);
+    List<HouseInfo> BackBussall(String address, Integer checkStatus,Long id);
     //通过活动请求
     int activePass(Integer id);
     //根据id查询取消政策

@@ -20,11 +20,13 @@
     select a.*,o.off_details as offName from activities_check a
       inner join off o
         on a.off_id = o.id
-        <where>
-          <if test="off_details != null and off_details != ''">
-            and o.off_details like concat('%',#{offDetails},'%')
-          </if>
-        </where>
+            inner join house_info h
+                on a.house_id = h.id
+                <where>
+                  <if test="off_details != null and off_details != ''">
+                    and o.off_details like concat('%',#{offDetails},'%')
+                  </if>
+                </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from activities_check

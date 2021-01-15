@@ -18,7 +18,7 @@
     <result column="off_status" jdbcType="INTEGER" property="offStatus" />
     <result column="check_status" jdbcType="INTEGER" property="checkStatus" />
     <result column="cancel_policy" jdbcType="INTEGER" property="cancelPolicy"/>
-    <result column="user_name" jdbcType="VARCHAR" property="landlordName"/>
+<!--    <result column="user_name" jdbcType="VARCHAR" property="landlordName"/>-->
   </resultMap>
   <sql id="Base_Column_List">
     id, estate_name, house_type, area, rent, lot, address, label, status, ,
@@ -31,16 +31,17 @@
   <select id="BackAdminall" resultMap="BaseResultMap">
     select h.*,u.user_name as landlordName from house_info h
         inner join `user` u
-            on h. = u.id
+            on h.landlord_id = u.id
                 <where>
                   <if test="landlordName != null and landlordName !=''">
                     and u.user_name like concat('%',#{landlordName},'%')
                   </if>
                   <if test="address != null and address !=''">
-                    and h.address like concat('%',#{address},'%')
+                    and h.estate_name like concat('%',#{address},'%')
                   </if>
                   and h.check_status = 1
                 </where>
+                order by h.rent
   </select>
   <select id="Fontall" resultMap="BaseResultMap">
     select * from house_info
@@ -59,31 +60,41 @@
           </if>
           and check_status = 1
         </where>
+        order by rent
   </select>
   <select id="BackBussall" resultMap="BaseResultMap">
-    select * from house_info
-        <where>
-          <if test="address != null and address != ''">
-            and address like concat('%',#{address},'%')
-          </if>
-          <if test="checkStatus != null and checkStatus != ''">
-            and check_status = #{checkStatus}
-          </if>
-        </where>
-  </select>
-  <select id="BackAdminallCheck" resultType="com.heikes.rent_common.pojo.HouseInfo">
-    select h.*,u.user_name as landlordName from house_info h
+    select h.*,u.user_name as landlordName,t.house_type_name as typeName from house_info h
         inner join `user` u
-            on h. = u.id
-            <where>
-              <if test="landlordName != null and landlordName !=''">
-                and u.user_name like concat('%',#{landlordName},'%')
-              </if>
-              <if test="address != null and address !=''">
-                and h.address like concat('%',#{address},'%')
-              </if>
-              and h.check_status = 0
-            </where>
+            on h.landlord_id = u.id
+                inner join house_type t
+                    on h.house_type = t.id
+                    <where>
+                      <if test="address != null and address != ''">
+                        and h.estate_name like concat('%',#{address},'%')
+                      </if>
+                      <if test="checkStatus != null and checkStatus != ''">
+                        and h.check_status = #{checkStatus}
+                      </if>
+                      and h.landlord_id = #{id}
+                    </where>
+                    order by h.rent
+  </select>
+  <select id="BackAdminallCheck" resultMap="BaseResultMap">
+    select h.*,u.user_name as landlordName,t.house_type_name as typeName from house_info h
+        inner join `user` u
+            on h.landlord_id = u.id
+              inner join house_type t
+                on h.house_type = t.id
+                <where>
+                  <if test="landlordName != null and landlordName !=''">
+                    and u.user_name like concat('%',#{landlordName},'%')
+                  </if>
+                  <if test="address != null and address !=''">
+                    and h.estate_name like concat('%',#{address},'%')
+                  </if>
+                  and h.check_status = 0
+                </where>
+                order by h.rent
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from house_info
@@ -95,17 +106,17 @@
             on h.cancel_policy = c.id
                 where h.id = #{id}
   </select>
-  <insert id="insert" parameterType="com.heikes.rent_common.pojo.HouseInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" keyColumn="id" parameterType="com.heikes.rent_common.pojo.HouseInfo">
     insert into house_info (estate_name, house_type,
       area, rent, lot, address, 
-      label, status, landlord_id, 
-      lat, lng, desc, off_status, 
-      check_status,cancel_policy)
+      label, landlord_id,
+      lat, lng, `desc`)
     values (#{estateName,jdbcType=VARCHAR}, #{houseType,jdbcType=INTEGER},
       #{area,jdbcType=INTEGER}, #{rent,jdbcType=INTEGER}, #{lot,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{label,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{landlordId,jdbcType=BIGINT},
-      #{lat,jdbcType=DECIMAL}, #{lng,jdbcType=DECIMAL}, #{desc,jdbcType=VARCHAR},0,0,1)
+      #{label,jdbcType=VARCHAR}, #{landlordId,jdbcType=BIGINT},
+      #{lat,jdbcType=DECIMAL}, #{lng,jdbcType=DECIMAL}, #{desc,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.heikes.rent_common.pojo.HouseInfo">
     insert into house_info
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -20,7 +20,7 @@ public interface InfoRemote {
 
     //新增房源
     @RequestMapping(value = "/back/addHouseInfo",method = RequestMethod.POST)
-    public Bizdto<Integer> addHouseInfo(HouseInfo houseInfo);
+    public Bizdto<Integer> addHouseInfo(@RequestBody HouseInfo houseInfo);
 
     //修改修改房源
     @RequestMapping("/back/updateHouseInfo")
@@ -41,7 +41,7 @@ public interface InfoRemote {
                                   @RequestParam(value = "userName",required = false) String userName,
                                   @RequestParam(value = "address",required = false) String address);
 
-    //后台房源查询管理员
+    //后台未审核房源查询管理员
     @RequestMapping("/back/BackAdminCheck")
     Bizdto<PageInfo<HouseInfo>> BackAdminCheck(@RequestParam("pageNum") Integer pageNum,
                                              @RequestParam("pageSize") Integer pageSize,
@@ -62,7 +62,8 @@ public interface InfoRemote {
     Bizdto<PageInfo<HouseInfo>> BackBussall(@RequestParam("pageNum") Integer pageNum,
                                             @RequestParam("pageSize") Integer pageSize,
                                             @RequestParam(value = "address",required = false) String address,
-                                            @RequestParam(value = "checkStatus",required = false) Integer checkStatus);
+                                            @RequestParam(value = "checkStatus",required = false) Integer checkStatus,
+                                            @RequestParam("id") Long id);
 
     //通过活动请求
     @RequestMapping("/back/activePass")
