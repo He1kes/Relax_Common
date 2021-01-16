@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.user.provider.mapper.FunctionMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.Function">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="function_name" jdbcType="VARCHAR" property="functionName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from function
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.Function">
+    insert into function (id, function_name, address, 
+      parent_id, level)
+    values (#{id,jdbcType=BIGINT}, #{functionName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{level,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.Function">
+    update function
+    set function_name = #{functionName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, function_name, address, parent_id, level
+    from function
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, function_name, address, parent_id, level
+    from function
+  </select>
+  <!--<select id="selectFunction" resultMap="BaseResultMap">
+    SELECT f.id, f.function_name, f.address, f.parent_id, f.level FROM `function` f
+    WHERE f.id
+    IN (
+        SELECT rf.function_id
+        FROM role_function rf
+        WHERE rf.role_id = #{roleId}
+    )
+    AND f.parent_id = #{parentId}
+    ORDER BY f.id
+  </select>-->
+
+  <select id="selectFunction" resultMap="BaseResultMap">
+    SELECT f.id, f.function_name, f.address, f.parent_id, f.level, f.desc FROM `function` f
+    <where>
+      f.id
+      IN (
+        SELECT rf.function_id
+        FROM role_function rf
+        <where>
+          <if test="roleId != null">
+            rf.role_id = #{roleId}
+          </if>
+        </where>
+        )
+        <if test="parentId != null">
+          AND f.parent_id = #{parentId}
+        </if>
+    </where>
+    ORDER BY f.id
+  </select>
+</mapper>

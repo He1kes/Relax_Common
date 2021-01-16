@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.coupon.provider.mapper.CouponTokenMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.CouponToken">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from coupon_token
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.CouponToken">
+    insert into coupon_token (id, coupon_id, token, 
+      status)
+    values (#{id,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{token,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.CouponToken">
+    update coupon_token
+    set coupon_id = #{couponId,jdbcType=BIGINT},
+      token = #{token,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, coupon_id, token, status
+    from coupon_token
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, coupon_id, token, status
+    from coupon_token
+  </select>
+</mapper>

@@ -29,6 +29,8 @@ public class CouponToken implements Serializable {
      */
     private String token;
 
+    private Integer status;
+
     public Long getId() {
         return id;
     }
@@ -51,12 +53,21 @@ public class CouponToken implements Serializable {
         this.token = token;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "CouponToken{" +
-            "id=" + id +
-            ", couponId=" + couponId +
-            ", token=" + token +
-        "}";
+                "id=" + id +
+                ", couponId=" + couponId +
+                ", token='" + token + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

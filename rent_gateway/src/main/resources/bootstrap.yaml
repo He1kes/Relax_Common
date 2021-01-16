@@ -8,8 +8,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.0.80:8848 #nacos注册中心地址
-        namespace: 092cdba7-f25a-4e6b-a180-f1436359652f
+        server-addr: 192.168.2.172:8848 #nacos注册中心地址
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
         group: rent_dev
 #      config:
 #        server-addr: 192.168.0.15:8848 #nacos的ip地址和端口号

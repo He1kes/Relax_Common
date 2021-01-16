@@ -1,5 +1,8 @@
 package com.heikes.rent_common.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -48,11 +51,15 @@ public class Coupon implements Serializable {
     /**
      * 开始日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date couponStart;
 
     /**
      * 结束日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date couponEnd;
 
     /**
@@ -71,9 +78,9 @@ public class Coupon implements Serializable {
     private String couponContent;
 
     /**
-     * 优惠券使用范围（1、全平台 2、单个商户）
+     * 全平台：-1，单个商户：商户id
      */
-    private Integer couponScope;
+    private Long couponScope;
 
     public Long getCouponId() {
         return couponId;
@@ -152,11 +159,12 @@ public class Coupon implements Serializable {
     public void setCouponContent(String couponContent) {
         this.couponContent = couponContent;
     }
-    public Integer getCouponScope() {
+
+    public Long getCouponScope() {
         return couponScope;
     }
 
-    public void setCouponScope(Integer couponScope) {
+    public void setCouponScope(Long couponScope) {
         this.couponScope = couponScope;
     }
 

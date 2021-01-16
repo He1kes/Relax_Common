@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rent.coupon.provider.mapper.CouponMapper">
+  <resultMap id="BaseResultMap" type="com.heikes.rent_common.pojo.Coupon">
+    <id column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="coupon_title" jdbcType="VARCHAR" property="couponTitle" />
+    <result column="coupon_desc" jdbcType="VARCHAR" property="couponDesc" />
+    <result column="coupon_count" jdbcType="INTEGER" property="couponCount" />
+    <result column="coupon_several" jdbcType="INTEGER" property="couponSeveral" />
+    <result column="coupon_hastoken" jdbcType="TINYINT" property="couponHastoken" />
+    <result column="coupon_start" jdbcType="TIMESTAMP" property="couponStart" />
+    <result column="coupon_end" jdbcType="TIMESTAMP" property="couponEnd" />
+    <result column="coupon_type" jdbcType="INTEGER" property="couponType" />
+    <result column="coupon_condition" jdbcType="VARCHAR" property="couponCondition" />
+    <result column="coupon_content" jdbcType="VARCHAR" property="couponContent" />
+    <result column="coupon_scope" jdbcType="BIGINT" property="couponScope" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from coupon
+    where coupon_id = #{couponId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.heikes.rent_common.pojo.Coupon">
+    insert into coupon (coupon_id, coupon_title, coupon_desc, 
+      coupon_count, coupon_several, coupon_hastoken, 
+      coupon_start, coupon_end, coupon_type, 
+      coupon_condition, coupon_content, coupon_scope
+      )
+    values (#{couponId,jdbcType=BIGINT}, #{couponTitle,jdbcType=VARCHAR}, #{couponDesc,jdbcType=VARCHAR}, 
+      #{couponCount,jdbcType=INTEGER}, #{couponSeveral,jdbcType=INTEGER}, #{couponHastoken,jdbcType=TINYINT}, 
+      #{couponStart,jdbcType=TIMESTAMP}, #{couponEnd,jdbcType=TIMESTAMP}, #{couponType,jdbcType=INTEGER}, 
+      #{couponCondition,jdbcType=VARCHAR}, #{couponContent,jdbcType=VARCHAR}, #{couponScope,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertCoupon">
+      insert into coupon (coupon_id, coupon_title, coupon_desc,
+      coupon_count, coupon_several,
+      coupon_start, coupon_end, coupon_type,
+      coupon_condition, coupon_content, coupon_scope
+      )
+    values (#{couponId,jdbcType=BIGINT}, #{couponTitle,jdbcType=VARCHAR}, #{couponDesc,jdbcType=VARCHAR},
+      #{couponCount,jdbcType=INTEGER}, #{couponSeveral,jdbcType=INTEGER},
+      #{couponStart,jdbcType=TIMESTAMP}, #{couponEnd,jdbcType=TIMESTAMP}, #{couponType,jdbcType=INTEGER},
+      #{couponCondition,jdbcType=VARCHAR}, #{couponContent,jdbcType=VARCHAR}, #{couponScope,jdbcType=INTEGER}
+      )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.heikes.rent_common.pojo.Coupon">
+    update coupon
+    set coupon_title = #{couponTitle,jdbcType=VARCHAR},
+      coupon_desc = #{couponDesc,jdbcType=VARCHAR},
+      coupon_count = #{couponCount,jdbcType=INTEGER},
+      coupon_several = #{couponSeveral,jdbcType=INTEGER},
+      coupon_hastoken = #{couponHastoken,jdbcType=TINYINT},
+      coupon_start = #{couponStart,jdbcType=TIMESTAMP},
+      coupon_end = #{couponEnd,jdbcType=TIMESTAMP},
+      coupon_type = #{couponType,jdbcType=INTEGER},
+      coupon_condition = #{couponCondition,jdbcType=VARCHAR},
+      coupon_content = #{couponContent,jdbcType=VARCHAR},
+      coupon_scope = #{couponScope,jdbcType=INTEGER}
+    where coupon_id = #{couponId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select coupon_id, coupon_title, coupon_desc, coupon_count, coupon_several, coupon_hastoken, 
+    coupon_start, coupon_end, coupon_type, coupon_condition, coupon_content, coupon_scope
+    from coupon
+    where coupon_id = #{couponId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select coupon_id, coupon_title, coupon_desc, coupon_count, coupon_several, coupon_hastoken, 
+    coupon_start, coupon_end, coupon_type, coupon_condition, coupon_content, coupon_scope
+    from coupon
+  </select>
+    <select id="selectCouponList" resultMap="BaseResultMap">
+      select coupon_id, coupon_title, coupon_desc, coupon_count, coupon_several, coupon_hastoken,
+      coupon_start, coupon_end, coupon_type, coupon_condition, coupon_content, coupon_scope
+      from coupon
+      <where>
+        <if test="couponCondition neq null and couponCondition neq ''">
+            and coupon_condition = #{couponCondition}
+        </if>
+        <if test="couponContent neq null and couponContent neq ''">
+            and coupon_content = #{couponContent}
+        </if>
+        <if test="couponType neq null and couponType neq -1">
+            and coupon_type = #{couponType}
+        </if>
+      </where>
+    </select>
+</mapper>

@@ -1,0 +1,18 @@
+server:
+  port: 9530
+spring:
+  application:
+    name: coupon-consumer
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.2.172:8848
+        file-extension: yaml
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+      discovery:
+        server-addr: 192.168.2.172:8848
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+  main:
+    allow-bean-definition-overriding: true
