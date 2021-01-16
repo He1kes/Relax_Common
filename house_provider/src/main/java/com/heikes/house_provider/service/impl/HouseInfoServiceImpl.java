@@ -84,9 +84,9 @@ public class HouseInfoServiceImpl implements HouseInfoService {
     }
 
     @Override
-    public PageInfo<HouseInfo> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus) {
+    public PageInfo<HouseInfo> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus,Long id) {
         PageHelper.startPage(pageNum,pageSize);
-        List<HouseInfo> list = houseInfoMapper.BackBussall(address, checkStatus);
+        List<HouseInfo> list = houseInfoMapper.BackBussall(address, checkStatus,id);
         return new PageInfo<HouseInfo>(list,5);
     }
 

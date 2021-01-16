@@ -33,7 +33,7 @@ public interface HouseInfoService {
     //前台房源查询
     PageInfo<HouseInfo> Fontall(Integer pageNum,Integer pageSize,Integer houseType,Integer area,Integer rent,String address);
     //后台查询房源商家
-    PageInfo<HouseInfo> BackBussall(Integer pageNum,Integer pageSize,String address,Integer checkStatus);
+    PageInfo<HouseInfo> BackBussall(Integer pageNum,Integer pageSize,String address,Integer checkStatus,Long id);
     //通过活动请求
     int activePass(Integer id);
     //根据id查询取消政策

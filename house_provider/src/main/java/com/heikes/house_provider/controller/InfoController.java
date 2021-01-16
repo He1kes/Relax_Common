@@ -11,11 +11,8 @@ import com.heikes.rent_common.pojo.HouseInfo;
 import com.heikes.rent_common.remote.house.InfoRemote;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.IOException;
-import java.io.InputStream;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -41,7 +38,8 @@ public class InfoController implements InfoRemote {
     @Override
     public Bizdto<Integer> addHouseInfo(HouseInfo houseInfo) {
         Bizdto<Integer> bizdto = new Bizdto<>();
-        int id = houseInfoService.insert(houseInfo);
+        houseInfoService.insert(houseInfo);
+        int id = houseInfo.getId();
         if (id > 0){
             bizdto.setCode(StatusCode.OK);
             bizdto.setMessage("新增成功");
@@ -126,11 +124,11 @@ public class InfoController implements InfoRemote {
     }
 
     @Override
-    public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus) {
+    public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus,Long id) {
         Bizdto<PageInfo<HouseInfo>> bizdto = new Bizdto<>();
         bizdto.setCode(StatusCode.OK);
         bizdto.setMessage("查询成功");
-        bizdto.setData(houseInfoService.BackBussall(pageNum,pageSize,address,checkStatus));
+        bizdto.setData(houseInfoService.BackBussall(pageNum,pageSize,address,checkStatus,id));
         return bizdto;
     }
 

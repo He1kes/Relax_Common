@@ -58,8 +58,8 @@ public class InfoServiceImpl implements InfoService {
     }
 
     @Override
-    public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus) {
-        return infoClient.BackBussall(pageNum, pageSize, address, checkStatus);
+    public Bizdto<PageInfo<HouseInfo>> BackBussall(Integer pageNum, Integer pageSize, String address, Integer checkStatus,Long id) {
+        return infoClient.BackBussall(pageNum, pageSize, address, checkStatus,id);
     }
 
     @Override
