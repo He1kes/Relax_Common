@@ -1,0 +1,19 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: user-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.2.172:8848
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+      config:
+        server-addr: 192.168.2.172:8848
+        file-extension: yaml
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+logging:
+  level:
+    com.rent.user.provider: debug

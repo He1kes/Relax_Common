@@ -36,6 +36,8 @@ public class Function implements Serializable {
      */
     private Integer level;
 
+    private String desc;
+
     public Long getId() {
         return id;
     }
@@ -72,14 +74,23 @@ public class Function implements Serializable {
         this.level = level;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     @Override
     public String toString() {
         return "Function{" +
-            "id=" + id +
-            ", functionName=" + functionName +
-            ", address=" + address +
-            ", parentId=" + parentId +
-            ", level=" + level +
-        "}";
+                "id=" + id +
+                ", functionName='" + functionName + '\'' +
+                ", address='" + address + '\'' +
+                ", parentId=" + parentId +
+                ", level=" + level +
+                ", desc='" + desc + '\'' +
+                '}';
     }
 }

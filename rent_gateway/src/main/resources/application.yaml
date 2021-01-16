@@ -6,6 +6,10 @@ spring:
           uri: lb://user-consumer
           predicates:
             - Path=/user/**
+        - id: coupon-consumer
+          uri: lb://coupon-consumer
+          predicates:
+            - Path=/coupon/**
         - id: order-route-proxy
           uri: lb://order-consumer
           predicates:
@@ -20,6 +24,6 @@ spring:
             - Path=/ohouse/**
   redis:
     database: 0
-    host: 192.168.0.15
+    host: 192.168.2.171
     port: 6379
 
