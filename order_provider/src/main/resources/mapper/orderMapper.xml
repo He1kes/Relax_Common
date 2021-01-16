@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rent.order_provider.mapper.OrderMapper">
+
+    <resultMap type="com.heikes.rent_common.pojo.OrderInfo" id="OrderInfo">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_total" property="orderTotal"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="order_time" property="orderTime"/>
+        <result column="landlord_id" property="landlordId"/>
+        <result column="house_id" property="houseId"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="widrqout_request_no" property="widrqoutRequestNo"/>
+        <result column="startDate" property="startDate"/>
+        <result column="stopDate" property="stopDate"/>
+    </resultMap>
+    <select id="getOrders" resultMap="OrderInfo">
+        select * from order_info
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+        </where>
+        order by order_time desc
+    </select>
+
+    <insert id="generateOrder">
+        insert into order_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="orderTotal != null">
+                order_total,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="orderTime != null">
+                order_time,
+            </if>
+            <if test="landlordId != null">
+                landlord_id,
+            </if>
+            <if test="houseId != null">
+                house_id,
+            </if>
+            <if test="tradeNo != null">
+                trade_no,
+            </if>
+            <if test="widrqoutRequestNo != null">
+                widrqout_request_no,
+            </if>
+            <if test="startDate != null">
+                startDate,
+            </if>
+            <if test="stopDate != null">
+                stopDate,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus},
+            </if>
+            <if test="orderTotal != null">
+                #{orderTotal},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone},
+            </if>
+            <if test="orderNumber != null">
+                #{orderNumber},
+            </if>
+            <if test="orderTime != null">
+                #{orderTime},
+            </if>
+            <if test="landlordId != null">
+                #{landlordId},
+            </if>
+            <if test="houseId != null">
+                #{houseId},
+            </if>
+            <if test="tradeNo != null">
+                #{tradeNo},
+            </if>
+            <if test="widrqoutRequestNo != null">
+                #{widrqoutRequestNo},
+            </if>
+            <if test="startDate != null">
+                #{startDate},
+            </if>
+            <if test="stopDate != null">
+                #{stopDate},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateOrderStatus">
+        update order_info set order_status = #{orderStatus}
+        where id = #{orderId}
+    </update>
+
+    <select id="getOrderById" resultMap="OrderInfo">
+        select * form order_info
+        where id = #{id}
+    </select>
+
+    <resultMap type="com.heikes.rent_common.pojo.OrderInfo" id="OrderInfoBack">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="order_total" property="orderTotal"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="order_time" property="orderTime"/>
+        <result column="landlord_id" property="landlordId"/>
+        <result column="house_id" property="houseId"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="widrqout_request_no" property="widrqoutRequestNo"/>
+        <result column="startDate" property="startDate"/>
+        <result column="stopDate" property="stopDate"/>
+        <result column="cancel" property="cancel"/>
+    </resultMap>
+    <select id="getOrdersBack" resultMap="OrderInfoBack">
+        SELECT distinct ordi.*,ordr.cancel AS cancel from order_info ordi left join order_remark ordr
+        on ordi.id = ordr.order_id
+        <where>
+            <if test="landId != null">
+                landlord_id = #{landId}
+            </if>
+            <if test="orderStatus != null">
+                and order_status LIKE CONCAT('%',#{orderStatus},'%')
+            </if>
+        </where>
+        order by ordi.order_time desc
+    </select>
+
+    <insert id="setOrderRemark">
+        insert into order_remark (order_id,cancel) values (#{orderId},#{cancel})
+    </insert>
+
+    <select id="getOrderMoney" resultType="double">
+        SELECT SUM(order_total) AS money FROM order_info
+        <where>
+            <if test="landId != null">
+                and landlord_id = #{landId}
+            </if>
+            <if test="orderStatus != null">
+                and order_status LIKE CONCAT('%',#{orderStatus},'%')
+            </if>
+            <if test="year != null">
+                and YEAR(order_time) = #{year}
+            </if>
+            <if test="month != null">
+                and MONTH(order_time) = #{month}
+            </if>
+            <if test="day != null">
+                and DAY(order_time) = #{day}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="OrderMoney" type="com.heikes.rent_common.kuo.OrderMoney">
+        <result column="riqi" property="riqi"></result>
+        <result column="money" property="money"></result>
+    </resultMap>
+    <select id="getOrderMoneyDay" resultMap="OrderMoney">
+        SELECT DAY(order_time) AS riqi,SUM(order_total) AS money FROM order_info
+        WHERE order_status = "已消费" AND YEAR(order_time) = #{year} AND MONTH(order_time) = #{month}
+        <if test="landId != null">
+            and landlord_id = #{landId}
+        </if>
+        GROUP BY DAY(order_time)
+        ORDER BY DAY(order_time)
+    </select>
+
+    <select id="getOrderCounts" resultType="int">
+        select count(1) from order_info
+        <where>
+            <if test="landId != null">
+                and landlord_id = #{landId}
+            </if>
+            <if test="orderStatus != null">
+                and order_status LIKE CONCAT('%',#{orderStatus},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getOrderMoneyMonth" resultMap="OrderMoney">
+        SELECT MONTH(order_time) AS riqi,SUM(order_total) AS money FROM order_info
+        WHERE order_status = "已消费" AND YEAR(order_time) = #{year}
+        <if test="landId != null">
+            and landlord_id = #{landId}
+        </if>
+        GROUP BY MONTH(order_time)
+        ORDER BY MONTH(order_time)
+    </select>
+</mapper>

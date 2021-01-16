@@ -1,0 +1,41 @@
+#spring:
+#  application:
+#    name: order-consumer
+#  cloud:
+#    nacos:
+#      config:
+#        server-addr: 192.168.0.80:8848
+#        file-extension: yml
+#        namespace: 092cdba7-f25a-4e6b-a180-f1436359652f
+#        group: rent_dev
+#      discovery:
+#        server-addr: 192.168.0.80:8848
+#        namespace: 092cdba7-f25a-4e6b-a180-f1436359652f
+#        group: rent_dev
+#  redis:
+#    database: 0
+#    host: 192.168.0.15
+#    port: 6379
+
+server:
+  port: 4242
+
+#本地nacos
+spring:
+  application:
+    name: order-consumer
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+      discovery:
+        server-addr: localhost:8848
+        namespace: 2742c876-f533-4ace-8f09-26ecf8ec8c6e
+        group: rent_dev
+  redis:
+    database: 0
+    host: 192.168.2.171
+    port: 6379
